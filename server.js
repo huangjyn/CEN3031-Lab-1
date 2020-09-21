@@ -43,19 +43,26 @@ const requestHandler = (request, response) => {
       return response.end();
     //complete this part  
     case "/footballClub":
-      return null;
+      response.writeHead(200, { "Content-Type": "text/html" });
+      response.write(JSON.stringify(footballClub));
+      return response.end();
       //complete this part as well
     default:
-      return null;
+      response.writeHead(404, { "Content-Type": "text/html" });
+      response.write("Bad gateway error");
+      return response.end();
   }
 };
 
 const connectServer = (_footballClub_) => {
   footballClub = _footballClub_
   // Create the server
-
+  const server = http.createServer(requestHandler);
   // Start the server
-
+  server.listen(port, () => {
+    //once the server is listening, this callback function is executed
+    console.log(`Server listening on: http://127.0.0.1:${port}`);
+});
   /**
    * How to?
    * Read https://www.w3schools.com/nodejs/met_http_createserver.asp

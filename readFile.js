@@ -2,6 +2,8 @@ import * as fs from "fs";
 
 const readJsonFile = (fileName, callback) => {
     fs.readFile(fileName +'.json', "utf8", (err, data) => {
+      if (err) throw err;
+      let footballClub = JSON.parse(data);
       /*
       HINT: Check out this resource on fs.readFile
         //https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
